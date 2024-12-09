@@ -1,0 +1,129 @@
+os.execute("cls")
+-- KaiserOS: A Simulated Operating System in Lua
+
+-- 1. Simulated File System
+local fs = {} -- Global in-memory file system
+
+-- Create or update a file
+function createFile(filename, content)
+    fs[filename] = content
+    print("File " .. filename .. " created.")
+end
+
+-- Read a file
+function readFile(filename)
+    if fs[filename] then
+        return fs[filename]
+    else
+        return "Error: File not found"
+    end
+end
+
+-- List files in the current directory (Simulated)
+function listFiles()
+    if next(fs) == nil then
+        print("No files found.")
+    else
+        for filename, _ in pairs(fs) do
+            print(filename)
+        end
+    end
+end
+
+-- 2. Process Management (Simulated)
+local processes = {} -- Simulated processes table
+
+-- Create a process (simulated)
+function createProcess(processName, func)
+    local pid = #processes + 1
+    processes[pid] = {
+        name = processName,
+        status = "Running",
+        pid = pid,
+        func = func
+    }
+    print("Process " .. processName .. " created with PID " .. pid)
+    return pid
+end
+
+-- Simulate process execution (simplified)
+function runProcess(pid)
+    local process = processes[pid]
+    if process then
+        print("Running process " .. process.name)
+        process.func() -- Execute the function associated with the process
+    else
+        print("Error: Process not found.")
+    end
+end
+
+-- Example process function
+function exampleProcess()
+    print("This is an example process.")
+end
+
+-- 3. Simulated I/O (Display & Keyboard)
+function printMessage(msg)
+    print(msg)
+end
+
+function getUserInput(prompt)
+    io.write(prompt)
+    return io.read()
+end
+
+-- 4. Command Interpreter
+function runCommand(command)
+    local cmd, arg = string.match(command, "(%w+)%s*(.*)")
+
+    if cmd == "create" then
+        local filename, content = string.match(arg, "(%w+)%s*(.*)")
+        createFile(filename, content)
+
+    elseif cmd == "read" then
+        print(readFile(arg))
+
+    elseif cmd == "list" then
+        listFiles()
+
+    elseif cmd == "exit" then
+        print("Exiting KaiserOS...")
+        os.exit()
+
+    elseif cmd == "run" then
+        local pid = tonumber(arg)
+        runProcess(pid)
+
+    else
+        print("Unknown command: " .. cmd)
+    end
+end
+
+-- 5. Kernel Simulation (Main Loop)
+function startKernel()
+    printMessage("Welcome to KaiserOS! Type 'help' for commands.")
+    
+    -- Step 1: Setup the file system
+    createFile("hello.txt", "Hello, KaiserOS World!")
+
+    -- Step 2: Setup processes
+    local pid1 = createProcess("ExampleProcess", exampleProcess)
+
+    -- Main Kernel loop
+    while true do
+        local input = getUserInput("KaiserOS> ")
+        
+        if input == "exit" then
+            break
+        elseif input == "help" then
+            printMessage("Available commands: create, read, list, run <pid>, exit")
+        else
+            runCommand(input)
+        end
+    end
+    
+    printMessage("KaiserOS is shutting down.")
+end
+
+-- 6. Full KaiserOS Simulation
+startKernel()
