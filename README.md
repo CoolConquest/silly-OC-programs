@@ -1,1 +1,1 @@
-each file is a separate script, that's literally it lol
+each file is a separate script, use however you want
