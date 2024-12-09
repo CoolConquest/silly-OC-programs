@@ -1,0 +1,39 @@
+local term = require("term") -- Import the terminal library
+
+-- Function to perform the chosen operation
+local function calculate(choice, num1, num2)
+    if choice == "1" then
+        return num1 + num2
+    elseif choice == "2" then
+        return num1 - num2
+    elseif choice == "3" then
+        return num1 * num2
+    elseif choice == "4" then
+        if num2 ~= 0 then
+            return num1 / num2
+        else
+            return "Error: Division by zero is not allowed."
+        end
+    else
+        return "Invalid choice."
+    end
+end
+
+-- Main program
+term.clear() -- Clear the screen
+print("Choose an operation:")
+print("1. Addition")
+print("2. Subtraction")
+print("3. Multiplication")
+print("4. Division")
+io.write("Enter the number of your choice: ")
+local choice = io.read()
+
+io.write("Enter the first number: ")
+local num1 = tonumber(io.read())
+
+io.write("Enter the second number: ")
+local num2 = tonumber(io.read())
+
+local result = calculate(choice, num1, num2)
+print("The result is: " .. tostring(result))
