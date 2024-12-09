@@ -1,0 +1,2 @@
+-- each file is a separate script
+-- thats literally it lol
