@@ -1,0 +1,11 @@
+-- Stress Test with Infinite Print Loop
+while true do
+    -- Print the message
+    print("HAHAHAHAHAHAHA")
+    
+    -- Perform a computationally heavy task
+    local x = 0
+    for i = 1, 1000000 do
+        x = x + math.sqrt(i) * math.sin(i)
+    end
+end
