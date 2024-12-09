@@ -1,0 +1,33 @@
+-- Function to convert Fahrenheit to Celsius
+local function fahrenheitToCelsius(fahrenheit)
+    return (fahrenheit - 32) * 5 / 9
+end
+
+-- Function to convert Celsius to Fahrenheit
+local function celsiusToFahrenheit(celsius)
+    return (celsius * 9 / 5) + 32
+end
+
+-- Main script
+print("Temperature Conversion Program")
+print("Type 1 to convert from Fahrenheit to Celsius.")
+print("Type 2 to convert from Celsius to Fahrenheit.")
+
+-- Get the user's choice
+local choice = tonumber(io.read())
+
+if choice == 1 then
+    -- Fahrenheit to Celsius
+    print("Enter the temperature in Fahrenheit:")
+    local fahrenheit = tonumber(io.read())
+    local celsius = fahrenheitToCelsius(fahrenheit)
+    print(string.format("%.2f°F is equal to %.2f°C", fahrenheit, celsius))
+elseif choice == 2 then
+    -- Celsius to Fahrenheit
+    print("Enter the temperature in Celsius:")
+    local celsius = tonumber(io.read())
+    local fahrenheit = celsiusToFahrenheit(celsius)
+    print(string.format("%.2f°C is equal to %.2f°F", celsius, fahrenheit))
+else
+    print("Invalid choice. Please restart the program and select 1 or 2.")
+end
