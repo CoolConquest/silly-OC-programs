@@ -2,6 +2,7 @@
 while true do
     -- Print the message
     print("HAHAHAHAHAHAHA")
+    os.sleep(0.05)
     
     -- Perform a computationally heavy task
     local x = 0
